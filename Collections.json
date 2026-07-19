@@ -1,0 +1,141 @@
+{
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/api-examen"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@test.com\",\n  \"mot_de_passe\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/Auth/Login.php",
+              "host": ["{{base_url}}"],
+              "path": ["Auth", "Login.php"]
+            },
+            "description": "Ouvre une session PHP si les identifiants sont corrects. A executer AVANT tout appel a vehicules.php."
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/Auth/Logout.php",
+              "host": ["{{base_url}}"],
+              "path": ["Auth", "Logout.php"]
+            },
+            "description": "Detruit la session en cours."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vehicules",
+      "item": [
+        {
+          "name": "Lister tous les vehicules",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehicules.php",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"]
+            }
+          }
+        },
+        {
+          "name": "Obtenir un vehicule par id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehicules.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Rechercher un vehicule",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehicules.php?recherche=toyota",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"],
+              "query": [{ "key": "recherche", "value": "toyota" }]
+            },
+            "description": "Filtre sur marque, modele ou immatriculation."
+          }
+        },
+        {
+          "name": "Creer un vehicule",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marque\": \"Ford\",\n  \"modele\": \"Ranger\",\n  \"immatriculation\": \"DK-3333-GH\",\n  \"annee\": 2024,\n  \"couleur\": \"Rouge\",\n  \"statut\": \"disponible\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehicules.php",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"]
+            }
+          }
+        },
+        {
+          "name": "Modifier un vehicule",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marque\": \"Toyota\",\n  \"modele\": \"Hilux\",\n  \"immatriculation\": \"DK-1234-AB\",\n  \"annee\": 2022,\n  \"couleur\": \"Blanc\",\n  \"statut\": \"en_maintenance\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehicules.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Supprimer un vehicule",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehicules.php?id=1",
+              "host": ["{{base_url}}"],
+              "path": ["vehicules.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
